@@ -85,31 +85,25 @@ Tahapan preprocessing data yang dilakukan:
 Langkah pertama adalah menghapus kolom yang tidak memiliki pengaruh langsung terhadap analisis prediktif. Kolom seperti Row ID, Order ID, Order Date, Customer ID, City, State, dan Product dihapus karena hanya berupa informasi administratif atau data unik yang tidak berkontribusi pada prediksi.
 2. Mengonversi Data ke Format Numerik
 Model machine learning hanya dapat bekerja dengan data numerik, sehingga semua kolom kategori harus dikonversi. Untuk kolom kategori dengan sedikit nilai unik, seperti Segment, digunakan Label Encoding yang mengubah kategori menjadi angka. Untuk kolom kategori dengan banyak nilai unik, seperti Country, Category, Subcategory, Region, dan Market, digunakan One-Hot Encoding, yang mengubah setiap kategori menjadi kolom biner (0 atau 1).
-3. Menangani Missing Values
-Nilai yang hilang dalam dataset diisi dengan median dari setiap kolom. digunakan median karena median lebih tahan terhadap outlier, sehingga memberikan hasil yang lebih stabil dibandingkan mean.
-4. Menghapus Outlier dengan IQR (Interquartile Range)
+3. Menghapus Outlier dengan IQR (Interquartile Range)
 Outlier adalah nilai yang terlalu jauh dari data mayoritas, yang bisa menyebabkan model membuat prediksi yang tidak akurat. Identifikasi outlier dilakukan dengan Interquartile Range (IQR), yang menghitung rentang antara Q1 (kuartil pertama) dan Q3 (kuartil ketiga). Data yang berada di luar batas Q1 - 1.5 * IQR atau Q3 + 1.5 * IQR dianggap sebagai outlier dan dihapus.
-5. Visualisasi Data Setelah Penanganan Missing Values & Outlier
-Setelah menangani missing values dan outlier, dilakukan visualisasi data untuk melihat perubahan distribusi data. Boxplot digunakan untuk melihat apakah masih ada outlier yang mencolok. Histogram digunakan untuk melihat distribusi masing-masing fitur numerik setelah preprocessing.
-6. Analisis Korelasi Antar Fitur
-Korelasi antara fitur dalam dataset dianalisis menggunakan heatmap korelasi. Ini membantu untuk memahami hubungan antara variabel, misalnya apakah Discount dan Sales memiliki korelasi negatif, atau bagaimana hubungan antara Profit dan Sales.
-7. Scatter Plot Discount vs Sales
-Scatter plot dibuat untuk melihat hubungan antara Discount dan Sales. Tujuannya adalah untuk memahami apakah peningkatan diskon secara langsung berdampak pada peningkatan jumlah penjualan.
-8. Feature Engineering
+4. Menangani Missing Values
+Nilai yang hilang dalam dataset diisi dengan median dari setiap kolom. digunakan median karena median lebih tahan terhadap outlier, sehingga memberikan hasil yang lebih stabil dibandingkan mean.
+5. Feature Engineering
 Feature Engineering adalah proses menambahkan fitur baru untuk meningkatkan analisis dan prediksi.
 Dua fitur baru dibuat:
 - Discount Impact – Menghitung dampak diskon terhadap penjualan dengan mengalikan nilai Discount dengan Sales.
 - Profit Margin – Mengukur efisiensi keuntungan dengan menghitung rasio antara Profit dan Sales.
 Fitur tambahan ini dapat memberikan wawasan lebih dalam tentang hubungan antara diskon, penjualan, dan profitabilitas.
-9. Membagi Data Menjadi Training dan Testing Set
+6. Membagi Data Menjadi Training dan Testing Set
 Dataset dibagi menjadi 80% untuk training dan 20% untuk testing. Pembagian ini dilakukan agar model dapat belajar dari sebagian besar data dan kemudian dievaluasi pada data yang belum pernah dilihat sebelumnya. Data test digunakan untuk mengukur performa model sebelum diterapkan ke data dunia nyata.
-10. Menangani Nilai Tak Terhingga (Inf) dan NaN
+7. Menangani Nilai Tak Terhingga (Inf) dan NaN
 Setelah pembagian data, perlu dicek apakah masih ada nilai Inf (tak terhingga) atau NaN (kosong). Nilai Inf dan -Inf diubah menjadi NaN, lalu NaN diisi dengan nol untuk menghindari error dalam model machine learning.
-11. Standardisasi Data
+8. Standardisasi Data
 Data distandarisasi menggunakan StandardScaler, sehingga semua fitur memiliki skala yang sama. standardisasi diperlukan karena beberapa algoritma machine learning (seperti regresi linier, SVM, dan k-NN) sensitif terhadap skala data. Standardisasi memastikan bahwa fitur dengan skala besar tidak mendominasi fitur dengan skala keci.
-12. Reduksi Dimensi dengan PCA (Jika Jumlah Fitur Lebih dari 1)
+9. Reduksi Dimensi dengan PCA (Jika Jumlah Fitur Lebih dari 1)
 Jika dataset memiliki banyak fitur, dilakukan Principal Component Analysis (PCA) untuk mengurangi jumlah fitur tanpa kehilangan terlalu banyak informasi. PCA mempertahankan 95% varians data, sehingga hanya fitur yang paling penting yang digunakan. Reduksi dimensi ini dapat membantu mempercepat proses training model dan menghindari overfitting.
-13. Seleksi Fitur dengan SelectKBest
+  0. Seleksi Fitur dengan SelectKBest
 Untuk memilih fitur yang paling berpengaruh terhadap prediksi Sales, digunakan metode SelectKBest dengan f_regression. Hanya 50 fitur terbaik yang dipilih berdasarkan tingkat korelasi terhadap target (Sales). Ini membantu mengurangi kompleksitas model dan meningkatkan akurasi prediksi.
 
 ## Modeling
