@@ -72,13 +72,6 @@ Dataset yang digunakan dalam analisis ini berasal dari data e-commerce sektor sk
 - Discount: Persentase diskon yang diberikan pada produk.
 - Profit: Keuntungan yang diperoleh dari penjualan produk.
 
-### Exploratory Data Analysis (EDA)
-  Dilakukan beberapa teknik visualisasi dan analisis eksplorasi untuk memahami pola data:
-  Beberapa analisis awal yang dilakukan:
-  - Melihat distribusi data menggunakan histogram.
-  - Mengidentifikasi korelasi antar variabel menggunakan heatmap.
-  - Membuat scatter plot antara "Discount" dan "Sales" untuk melihat pola hubungan.
-
 ## Data Preparation
 Tahapan preprocessing data yang dilakukan:
 1. Menghapus Kolom yang Tidak Relevan
@@ -114,13 +107,13 @@ Untuk memilih fitur yang paling berpengaruh terhadap prediksi Sales, digunakan m
     lalu mengambil rata-ratanya sebagai prediksi.
     Kelebihan: Mudah dipahami dan efektif untuk dataset kecil.
     Kekurangan: Kurang efisien pada dataset besar dan sensitif terhadap outlier.
-    parameter yang digunakan : n_neighbors = 5 : Jumlah tetangga terdekat yang digunakan untuk prediksi.
+    parameter yang digunakan : n_neighbors = 2 : Jumlah tetangga terdekat yang digunakan untuk prediksi.
 
  - Random Forest
    cara kerja : Model berbasis pohon keputusan yang kuat terhadap overfitting. Model ini bekerja dengan membuat banyak pohon keputusan, lalu menggabungkan hasilnya untuk mendapatkan prediksi yang lebih akurat.
    Kelebihan: Dapat menangani dataset besar dan tidak terlalu terpengaruh oleh outlier.
    Kekurangan: Cenderung lebih lambat dibanding model lain dan dapat menjadi kompleks.
-   parameter yang digunakan : n_estimators=200 : Jumlah pohon dalam ensemble (semakin banyak pohon, semakin stabil hasilnya).
+   parameter yang digunakan : n_estimators=100 : Jumlah pohon dalam ensemble (semakin banyak pohon, semakin stabil hasilnya).
                               max_depth=10 : Kedalaman maksimum setiap pohon (membantu mengontrol kompleksitas model).
                               random_state=42 : Menetapkan seed untuk hasil yang konsisten setiap kali model dijalankan.
 
